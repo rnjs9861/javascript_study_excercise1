@@ -1,84 +1,70 @@
-# 4. 연산자
+# 6. if 문
 
-- 산술연산자
-- 할당연산자
-- 비교연산자
-- 논리연산자
+## 6.1 if ~ 구문
 
-## 4.1 산술연산자
+- 참, 거짓에 따라 특정 코드의 실행을 제어
+
+```
+if(조건식){
+  문장;
+  ...
+}
+```
+
+## 6.2 if ~ else ~ 구문
 
 ```txt
-+
--
-*
-/
-% 나머지 계산
-** 거듭제곱 계산
-++ 1증가
--- 1감소
+if(조건식){
+  문장;
+  ...
+} else {
+  문장;
+  ...
+}
+
 ```
 
-## 4.2 할당연산자
+let num = 9;
 
-- 할당(assignment) 연산자는 데이터나 변수 값을 변수에 저장, 즉 메모리 공간에 할당하는 역할
+if (num % 2 == 0) {
+console.log(`${num}은(는) 짝수입니다`);
+} else {
+console.log(`${num}은(는) 홀수입니다`);
+}
+
+// 70점 이상이면 합격, 그렇지 않으면 불합격
+let score = 65;
+let result = "";
+
+if (score >= 70) {
+result = "합격";
+} else {
+result = "불합격";
+}
+console.log(result + "입니다");
+
+```
+
+```
+
+## 6.2 if ~ else if ~ else 구문
+
+## 7. switch 문
+
+- if문과 거의 같은 방식으로 동작
 
 ```js
-let a = 10,
-  b = 20,
-  c = 30,
-  d = 40,
-  e = 50;
+// 괄호 안에 있는 변수으 ㅣ값에 따라
+switch (변수) {
+  //해당 case에 있는 문장들이 실행
+  case 값1:
+    문장; //값이 1이면 문장을 실행하라!
+    break; //그리고 나가라!
+  case 값2:
+    문장;
+    break;
 
-//둘이 같다
-//a = a + 3; //13
-a += 3; //13
-
-b -= 8; // 12
-c *= 3; // 90
-d /= 10; //4
-e %= 6; //2
-console.log(e);
-
-let f = "안녕";
-f += " 하세요";
-
-console.log(f);
+  default: //이 모든 케이스에 해당되지 않는다면 default(초깃값) 를 반환하라
+    문장;
+}
 ```
-
-```js
-let username = "이제동";
-let tel = "010-3043-0234";
-let age = 30;
-
-let text = "";
-
-text += "<table border=1>";
-text += "<tr><th>이름</th><th>전화번호</th><th>나이</th></tr>";
-text += "<tr><td>" + username + "</td></tr>";
-text += "</table>";
-
-document.write(text);
-```
-
-### 4.3 비교연산자
-
-```js
-let a = 3,
-  b = "3",
-  c = 5,
-  d = 3;
-console.log(a == b); // true 같다
-console.log(a === b); // false 데이터 타입까지 같냐? no
-console.log(a != b); //false 다르냐? -> no 같아
-console.log(a !== b); // true 데이터 타입까지 다르냐? yes
-console.log(a > c); // false
-console.log(a < c); // true
-console.log(a >= c); // false
-console.log(a <= c); // true
-```
-
-## 4.4 논리연산자
-
-- && : AND 두 조건이 모두 true 일 경우에만 최종 결과 true 반환
-- || : OR 두 조건 중 하나만 true가 되어도 최종결과 true
-- ! : NOT 결과가 true인 경우 false, 반대로 false인 경우 true

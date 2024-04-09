@@ -1,14 +1,18 @@
-let a = 3,
-  b = "3",
-  c = 5,
-  d = 3;
-console.log(a == b); // true 같다
-console.log(a === b); // false 데이터 타입까지 같냐? no
-console.log(a != b); //false 다르냐? -> no 같아
-console.log(a !== b); // true 데이터 타입까지 다르냐? yes
-console.log(a > c); // false
-console.log(a < c); // true
-console.log(a >= c); // false
-console.log(a <= c); // true
+let num = 9;
 
-console.log(!a == b); //true
+if (num % 2 == 0) {
+  console.log(`${num}은(는) 짝수입니다`);
+} else {
+  console.log(`${num}은(는) 홀수입니다`);
+}
+
+// 70점 이상이면 합격, 그렇지 않으면 불합격
+let score = 65;
+let result = "";
+
+if (score >= 70) {
+  result = "합격";
+} else {
+  result = "불합격";
+}
+console.log(result + "입니다");
