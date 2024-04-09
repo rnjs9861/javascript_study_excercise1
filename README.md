@@ -1,115 +1,84 @@
-# 3. 데이터형(Data Type)
+# 4. 연산자
 
-- number : 숫자
-- string : 문자열
-- boolean : true? or false?
-- null
-- undefined
-- Bigint
-- object 객체
-- symbol
+- 산술연산자
+- 할당연산자
+- 비교연산자
+- 논리연산자
 
-## 3.1 숫자 number
+## 4.1 산술연산자
 
-```js
-const a = 3; // 정수(integer)
-const b = 5.7; // 부동 소수점 숫자 (floating point number)
-const c = 123e3; // 123000
-const d = 123e-3; // 0.123
-
-console.log(d);
+```txt
++
+-
+*
+/
+% 나머지 계산
+** 거듭제곱 계산
+++ 1증가
+-- 1감소
 ```
 
-## BigInt
+## 4.2 할당연산자
 
-- 정수는 15개의 숫자, 15자리 정수까지 나타낼수 있다.
-- 그 이상의 정수를 사용하려면 Binint 형 사용해야한다.
+- 할당(assignment) 연산자는 데이터나 변수 값을 변수에 저장, 즉 메모리 공간에 할당하는 역할
 
 ```js
-const e = 99999999999999999998777777n;
+let a = 10,
+  b = 20,
+  c = 30,
+  d = 40,
+  e = 50;
+
+//둘이 같다
+//a = a + 3; //13
+a += 3; //13
+
+b -= 8; // 12
+c *= 3; // 90
+d /= 10; //4
+e %= 6; //2
 console.log(e);
+
+let f = "안녕";
+f += " 하세요";
+
+console.log(f);
 ```
 
-## 문자열 string
-
 ```js
-// 템플릿 문자열 ``
-
 let username = "이제동";
-let age = 27;
+let tel = "010-3043-0234";
+let age = 30;
 
-let text2 = "이름:" + username + "   나이:" + age;
-console.log(text2);
+let text = "";
 
-let text3 = `이름: ${username}, 나이: ${age}`;
-console.log(text3);
+text += "<table border=1>";
+text += "<tr><th>이름</th><th>전화번호</th><th>나이</th></tr>";
+text += "<tr><td>" + username + "</td></tr>";
+text += "</table>";
+
+document.write(text);
 ```
 
-## boolean
+### 4.3 비교연산자
 
 ```js
-let x = 5 > 3;
-let y = 5 < 3;
-
-console.log(x, y);
+let a = 3,
+  b = "3",
+  c = 5,
+  d = 3;
+console.log(a == b); // true 같다
+console.log(a === b); // false 데이터 타입까지 같냐? no
+console.log(a != b); //false 다르냐? -> no 같아
+console.log(a !== b); // true 데이터 타입까지 다르냐? yes
+console.log(a > c); // false
+console.log(a < c); // true
+console.log(a >= c); // false
+console.log(a <= c); // true
 ```
 
-## undefined, null(빈 문자열)
+## 4.4 논리연산자
 
-```js
-let x;
-console.log(x);
-
-let y = "";
-console.log(typeof y);
-```
-
-## 객체 object
-
-```js
-const user = {
-  id: "kdh",
-  name: "홍길동",
-  age: 24,
-};
-
-console.log(user.id);
-```
-
-## 심볼 symbol
-
-- number, string, boolean과 같은 원시데이터
-- 유일한 식별자로서 객체의 속성을 추가하는데 사용
-
-```js
-const member = {
-  name: "홍길동",
-  age: 30,
-};
-
-//Symbol()로 심볼 id 생성
-let id = Symbol("id");
-//객체 member 의 키 id에 문자열 "kdhong" 저장
-//심볼 id가 객체의 키로 사용되면 심볼 데이터형은
-//유일한 식별자이기 때문에 객체의 키 이름이 겹쳐서 충돌하는 경우 방지
-
-member[id] = "kdhong";
-//=member.id = "kdhong";
-
-//객체 member에서 심볼 id 가 키로 사용된 요소는
-// member[id]에 의해 접근 할 수 있다.
-//심볼 id와 새롭게 생성된 Symbol("id")는 서로 다르다.
-console.log(id == Symbol("id"));
-
-//== 같냐? === 데이터 타입까지 같냐?
-```
-
-## 3.8 배열 array
-
-- index는 0 부터 시작
-
-```js
-const car = ["현대", "기아", "벤츠", "BMW"];
-
-console.log(car[0]);
-```
+- && : AND 두 조건이 모두 true 일 경우에만 최종 결과 true 반환
+- || : OR 두 조건 중 하나만 true가 되어도 최종결과 true
+- ! : NOT 결과가 true인 경우 false, 반대로 false인 경우 true
