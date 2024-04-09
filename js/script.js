@@ -1,18 +1,7 @@
-let num = 9;
+const scores = [88, 75, 95, 90];
 
-if (num % 2 == 0) {
-  console.log(`${num}은(는) 짝수입니다`);
-} else {
-  console.log(`${num}은(는) 홀수입니다`);
+for (let score of scores) {
+  console.log(score);
 }
-
-// 70점 이상이면 합격, 그렇지 않으면 불합격
-let score = 65;
-let result = "";
-
-if (score >= 70) {
-  result = "합격";
-} else {
-  result = "불합격";
-}
-console.log(result + "입니다");
+//밑은 실행이 안됨. 왜냐면 score 이 위 for 문 안에서 만들어져서 그 outside 접근 불가
+console.log(score);
