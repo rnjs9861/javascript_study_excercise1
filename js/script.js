@@ -14,11 +14,3 @@ function fnc1() {
 
 fnc1();
 console.log(y); // 지역 변수 y로 접근 못함
-
-// 블록 스코프
-function fnc2() {
-  if (true) {
-    let z = 10; // 변수 z는 if문 내, 즉 블록 내부에서 선언
-  }
-  console.log(z);
-}

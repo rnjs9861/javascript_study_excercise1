@@ -203,3 +203,119 @@ function fnc2() {
 
 - 클로저는 전역 변수가 아닌 변수를 전역 변수와 같은 방식으로 동작 하지만,
   그 값을 함부로 변경 할 수 없도록 변수를 "사유화" 할 수 있는 방법을 제공
+
+- 클로저는 함수와 그 함수가 선언 될때의 렉시컬 환경과의 조합이다.
+
+```js
+//let counter = 0; //전역 변수 (페이지 내 어디서든 변수에 접근이 가능 =LEXICAL 환경)
+
+const increase = (function () {
+  //지역 변수 life cycle 생명주기 마지막 document.get 줄을 끝내면 생명 끝 처음부터 다시시작 0 1 0 1 (계속 초기화 됨)
+  let counter = 0;
+  console.log(counter);
+  return function () {
+    counter += 1;
+    console.log(counter);
+    return counter;
+  };
+  //  document.getElementById("show").innerHTML = counter;
+})();
+
+function incCounter() {
+  document.getElementById("show").innerHTML = increase();
+}
+//이렇게 하면 계속 유지됨
+```
+
+```js
+// 카운터 값 count를 createCounter 함수의 지역변수로 설정
+const createCounter = () => {
+  let count = 0; // 카운터의 카운트 초기 값 설정
+  console.log(count);
+
+  // handleIncrement 함수는 count 변수에 접근하고 수정할 수 있다.
+  // 이 함수는 클로저이며, createCounter 함수의 지역변수인 count를 기억한다.
+  const handleIncrement = () => {
+    console.log(count);
+    count += 1; // 현재 카운트 값을 1증가
+    // 화면에 새로운 카운트 값을 업데이트
+    document.getElementById("show").innerHTML = count;
+  };
+
+  // 클로저인 handleIncrement 함수를 반환한다.
+  // 이 함수는 외부에서 호출될 수 있으며,
+  // createCounter의 count 변수에 계속해서 접근할 수 있다.
+  return handleIncrement;
+};
+
+const icrement = createCounter();
+```
+
+- 리액트에서 클로저를 활용한 카운터 컴포넌트
+
+```js
+import React, { useState } from "react";
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+
+  const handleIncrement = () => {
+    // 클릭 이벤트가 발생할 때마다 handleIncrement함수가 실행 된다.
+    // 이 함수는 setCount를 호출하여 현재 count상태를 업데이트 하는데
+    // 여기서 prevCount => prevCount + 1이라는 업데이트 함수를 사용한다.
+    // 이 함수는 현재 상태값을 인자로 받아 새로운 상태값을 반환 하는데
+    // 이 과정에서 클로저를 통해 prevCount의 최신 상태를 참조하고 있다.
+    setCount((prevCount) => prevCount + 1);
+  };
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleIncrement}>증가</button>
+    </div>
+  );
+};
+
+export default Counter;
+```
+
+# 10.6 예외처리(exceptional handling)
+
+- 코드 실행 중 예기치 못한 오류가 발생했을 때 코드의 흐름을 복구하는 기능
+
+## 10.6.1 try ~ catch 문
+
+```js
+// 예외처리
+try {
+  alerttt("안녕하세요");
+  console.log("test");
+} catch (error) {
+  console.log("error");
+}
+```
+
+```js
+const checkInput = () => {
+  let input_elem = document.getElementById("input1");
+  let a = input_elem.value;
+  document.getElementById("show").innerHTML = "";
+
+  try {
+    if (a === "") {
+      throw "비어 있습니다.";
+    }
+    if (isNaN(a)) {
+      throw "숫자가 아닙니다.";
+    }
+    a = Number(a);
+    if (a < 0 || a > 9) {
+      throw "0~9 사이 숫자가 아닙니다.";
+    }
+  } catch (error) {
+    document.getElementById("show").innerHTML = `오류: ${error}`;
+  } finally {
+    input_elem.value = "";
+  }
+};
+```
