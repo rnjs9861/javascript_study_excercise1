@@ -12,9 +12,18 @@
     <title>자바 스크립트 스터디</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
+  <style>
+    #box {
+      border: solid 3px red;
+      width: 300px;
+      height: 200px;
+    }
+  </style>
   <body>
-    <button id="button">클릭하라</button>
-    <p id="show"></p>
+    <div id="box" onmousemove="showCoord(event)">
+      <p id="show"></p>
+    </div>
+
     <script src="js/event.js"></script>
   </body>
 </html>
