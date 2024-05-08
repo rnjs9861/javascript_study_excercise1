@@ -1,3 +1,5 @@
+# 15. 이벤트
+
 ## 15.1 이벤트
 
 - 웹 페이지에서 발생하는 사건을 의미
@@ -60,52 +62,57 @@ btn.addEventListener("click", function () {
 - 마우스에 관련된 이벤트는 웹에서 가장 많이 사용된다.
 - onclick : 사용자가 요소를 클릭했을 때
 - ondblclick : 사용자가 요소를 더블 클릭했을 때
-- onmouseover : 마우스 포인터가 요소 위에 올라갔을 때, 자식 요소에 대해서도 동작
-- onmouseout : 마우스 포인터가 요소에서 벗어날 때, 자식 요소에 대해서도 동작
+- onmouseover : 마우스 포인터가 요소 위에 올라갔을 때, 자식요소에 대해서도 동작
+- onmouseout : 마우스 포인터가 요소에서 벗어날 때, 자식요소에 대해서도 동작
 - onmouseenter : 마우스 포인터가 요소 안으로 진입할 때
 - onmouseleave : 마우스 포인터가 요소에서 외부로 나갈 때
 - onmousemove : 마우스 포인터가 요소안에서 움직일 때
 
-## 15.2.1 onclick/ondblclick
-
-```js
-function showMessage1() {
-  document.getElementById("show").innerHTML = "클릭했군";
-}
-
-function showMessage2() {
-  document.getElementById("show").innerHTML = "더블 클릭했군";
-}
-```
+### 15.2.1 onclick/ondblclick 이벤트
 
 ```html
 <body>
-  <button onclick="showMessage1()">클릭하라</button>
-  <button ondblclick="showMessage2()">더블 클릭하라</button>
+  <button onclick="showMessage1()">클릭하세요!</button>
+  <button ondblclick="showMessage2()">더블 클릭하세요!</button>
+
   <p id="show"></p>
+
   <script src="js/event.js"></script>
 </body>
 ```
 
-### 15.2.2 onmouseover/onmouseout
-
 ```js
-function changeColor1(btn) {
-  btn.style.backgroundColor = "pink";
+function showMessage1() {
+  document.getElementById("show").innerHTML = "클릭했어요!";
 }
 
-function changeColor2(btn) {
-  btn.style.backgroundColor = "aqua";
+function showMessage2() {
+  document.getElementById("show").innerHTML = "더블 클릭했어요!";
 }
 ```
 
+### 15.2.2 onmouseover/onmouseout 이벤트
+
 ```html
-<div onmouseover="changeColor1(this)" onmouseout="changeColor2(this)">
-  마우스를 올려보라
-  <div>자식요소</div>
-</div>
-<p id="show"></p>
-<script src="js/event.js"></script>
+<body>
+  <button onmouseover="changeBg1(this)" onmouseout="changeBg2(this)">
+    마우스를 올려보세요
+  </button>
+
+  <p id="show"></p>
+
+  <script src="js/event.js"></script>
+</body>
+```
+
+```js
+function changeBg1(btn) {
+  btn.style.backgroundColor = "pink";
+}
+
+function changeBg2(btn) {
+  btn.style.backgroundColor = "";
+}
 ```
 
 ### 15.2.3 onmouseenter 이벤트
@@ -113,30 +120,44 @@ function changeColor2(btn) {
 - onmouseover 이벤트와 유사한 기능
 
 ```html
-<style>
-  #box1 {
-    border: solid 3px red;
-  }
-  #box2 {
-    border: solid 3px aqua;
-  }
-  p {
-    border: solid 3px black;
-  }
-</style>
-<body>
-  <div id="box1" onmouseenter="increaseX()">
-    <p>단락1</p>
-    <span id="show1"></span>
-  </div>
+<!-- Document -->
+<!DOCTYPE html>
+<!-- 요소: html, 속성: lang -->
+<html lang="ko">
+  <!-- 요소: head -->
+  <head>
+    <!-- 요소: meta, 속성: charset -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 요소: title, 텍스트: 자바스크립트 스터디 -->
+    <title>자바스크립트 스터디</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+      div#box1 {
+        border: solid 3px red;
+      }
+      div#box2 {
+        border: solid 3px blue;
+      }
+      p {
+        border: solid 1px black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box1" onmouseenter="increaseX()">
+      <p>단락1</p>
+      <span id="show1"></span>
+    </div>
 
-  <div id="box2" onmouseover="increaseY()">
-    <p>단락2</p>
-    <span id="show2"></span>
-  </div>
+    <div id="box2" onmouseover="increaseY()">
+      <p>단락2</p>
+      <span id="show2"></span>
+    </div>
 
-  <script src="js/event.js"></script>
-</body>
+    <script src="js/event.js"></script>
+  </body>
+</html>
 ```
 
 ```js
@@ -157,17 +178,6 @@ function increaseY() {
 ### 15.2.4 onmouseleave 이벤트
 
 ```html
-<style>
-  #box1 {
-    border: solid 3px red;
-  }
-  #box2 {
-    border: solid 3px aqua;
-  }
-  p {
-    border: solid 3px black;
-  }
-</style>
 <body>
   <div id="box1" onmouseleave="increaseX()">
     <p>단락1</p>
@@ -204,24 +214,84 @@ function showCoord(e) {
 }
 ```
 
-### textmove
+### 15.3 포커스 이벤트
 
-```js
-document.addEventListener("scroll", function () {
-  const scrollAmount = window.scrollY;
-  const textTop = document.getElementById("textTop");
-  const textBottom = document.getElementById("textBottom");
-
-  textTop.style.transform = `translateX(${scrollAmount * 0.5}px)`;
-  textBottom.style.transform = `translateX(-${scrollAmount * 0.5}px)`;
-});
-```
+- onfocus : 요소가 포커스를 얻었을 때
+- onblur : 요소가 포커스를 잃었을 때
+- 텍스트나 비밀번호 입력창 안에 마우스를 클릭하면 마우스 커서가 깜빡인다.
+- 이런 상태를 포커스를 얻었다고 표현
+- 반대로 입력창 외부를 클릭하면 포커스를 잃게 된다.
 
 ```html
 <body>
-  <div id="textTop" class="text">위쪽 텍스트 - 오른쪽으로 이동</div>
-  <div id="textBottom" class="text">아래쪽 텍스트 - 왼쪽으로 이동</div>
+  <input type="text" id="uid" />
+  <input
+    type="password"
+    id="upw"
+    onfocus="changeColor3()"
+    onblur="changeColor4()"
+  />
 
-  <script src="js/textmove.js"></script>
+  <script src="js/event.js"></script>
 </body>
 ```
+
+```js
+const userId = document.getElementById("uid");
+const userPw = document.getElementById("upw");
+
+function changeBgColor1() {
+  userId.style.backgroundColor = "yellow";
+}
+function changeBgColor2() {
+  userId.style.backgroundColor = "gray";
+}
+
+userId.onfocus = function () {
+  changeBgColor1();
+};
+userId.onblur = function () {
+  changeBgColor2();
+};
+
+function changeColor3() {
+  userPw.style.backgroundColor = "yellow";
+}
+
+function changeColor4() {
+  userPw.style.backgroundColor = "red";
+}
+```
+
+## 15.4 기타 이벤트
+
+### 15.4.1 onchange 이벤트
+
+```html
+<body>
+  <label>
+    사이즈:
+    <select name="size" id="sz">
+      <option value="">선택</option>
+      <option value="small">S</option>
+      <option value="midium">M</option>
+      <option value="large">L</option>
+      <option value="xlarge">XL</option>
+    </select>
+  </label>
+  <p id="show"></p>
+
+  <script src="js/event.js"></script>
+</body>
+```
+
+```js
+const sel = document.getElementById("sz");
+sel.addEventListener("change", function (e) {
+  document.getElementById(
+    "show"
+  ).innerHTML = `선택한 사이즈는 ${e.target.value}입니다.`;
+});
+```
+
+# 1234

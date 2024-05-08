@@ -4,7 +4,7 @@ const dog = {
   color: "흰색",
   age: 3,
   intro: function () {
-    return `우리집 강아지의 이름은 ${this.name} 입니다.`;
+    return `우리집 강아지 이름은 ${this.name} 입니다.`;
   },
 };
 
